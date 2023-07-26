@@ -16,3 +16,18 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+//Ajout du Eventlistener (ajouter un événement au clique de la souris sur chaque flèche)
+const flecheGauche = document.querySelector(".arrow_left");
+flecheGauche.addEventListener("click", function () {
+
+}
+)
+console.log (flecheGauche);
+
+const flecheDroite = document.querySelector(".arrow_right");
+flecheDroite.addEventListener("click", function () {
+
+}
+)
+console.log (flecheDroite);
