@@ -2,6 +2,7 @@
 // Slides : le nom de l'objet / image et tagLine : des identifiants / et le reste : des valeurs
 
 const slides = [
+  // création d'une variable constante intitulée "slides" de type tableau, comprenant des objets
   {
     image: "./assets/images/slideshow/slide1.jpg",
     tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
@@ -21,25 +22,48 @@ const slides = [
   },
 ];
 
+let numero = 0; // création de la variable "numéro", qui va changer tout au long du programme Et je l'initialise à 0
+
 //Ajout du Eventlistener (ajoute un événement au clique de la souris sur chaque flèche)
 const flecheGauche = document.querySelector(".arrow_left");
 flecheGauche.addEventListener("click", function () {
   console.log(flecheGauche);
-  changeSlide(-1);
+  ChangeSlide(-1);
 });
 
 const flecheDroite = document.querySelector(".arrow_right");
 flecheDroite.addEventListener("click", function () {
   console.log(flecheDroite);
-  changeSlide(1);
+  ChangeSlide(1);
 });
 
-let numero = 0; // le compteur commence à 0
+//creation du point avec la classe "dot_selected"
+let selectedBullet = document.createElement("div");
+selectedBullet.classList.add("dot", "dot_selected");
+document.getElementById("points").appendChild(selectedBullet);
+// Ajout des 4 bullet points : création d'éléments enfants (du parent "dots")
+for (let i = [0]; i < slides.length - 1; i++) {
+  //boucle, avec l'instruction suivante :
+  let bulletPoint = document.createElement("div"); //creation d'une Div
+  bulletPoint.classList.add("dot"); //à laquelle j'attribue la class "dot"
+  document.getElementById("points").appendChild(bulletPoint); //puis récupération de l'élément parent pour y ajouter l'élément enfant ainsi créé
+}
 
-function changeSlide(sens) {
+function ChangeSlide(sens) {
+  // création de la fonction ChangeSlide, avec le paramètre "sens"
   numero = numero + sens;
   if (numero < 0) numero = slides.length - 1;
   if (numero > slides.length - 1) numero = 0;
-  document.getElementById("slide").src = slides[numero].image; // .image fait appel à "image" de mon tableau
-  document.getElementById("tagline").innerHTML = slides[numero].tagLine;
+  document.getElementById("slide").src = slides[numero].image; // .image fait appel à l'identifiant "image" de mon objet
+  document.getElementById("tagline").innerHTML = slides[numero].tagLine; // .tagLine fait appel à l'identifiant "tagLine" de mon objet
+
+  // mise en place du point actif au changement de la slide
+  const dots_array = document.querySelectorAll(".dot");
+  dots_array.forEach((dot, index) => {
+    if (index === numero) {
+      dot.classList.add("dot_selected");
+    } else {
+      dot.classList.remove("dot_selected");
+    }
+  });
 }
